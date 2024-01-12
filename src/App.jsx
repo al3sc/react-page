@@ -1,35 +1,54 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Button, Image} from 'react-bootstrap';
+import closedBox from './img/gift-box-closed.png';
+import IMAGES from './img/Images';
+import downloadPDF from './files/ticketdirect-1_Riccardo.pdf';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isNotFirst, setIsNotFirst] = useState(false)
 
-  return (
-    <>
+  const handleGiftOpen = () => {
+    const pdfUrl = "/src/files/ticketdirect-1_Riccardo.pdf";
+    const pdf = downloadPDF;
+    const link = document.createElement("a");
+    //link.href = pdfUrl;
+    link.href = downloadPDF;
+    link.download = "ticket_Riccardo.pdf"; // specify the filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setIsOpen(true)
+    !isNotFirst && setIsNotFirst(true)
+  } 
+
+  const handleGiftClose = () => {
+    setIsOpen(false)
+  }
+
+  return (<>
+      {isNotFirst || isOpen ?
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Penso che gli auguri siano sufficienti.</h1>
+        <h2>Però se hai bisogno di riscaricare il biglietto, clicca pure.</h2>
+      </div>:
+      <h1>Happy birthday Doc❤️!</h1>}
+      <div>
+        {isOpen ?
+        <div>
+          <Button className="gift opened-gift" onClick={() => handleGiftClose()}>
+            <Image src={IMAGES.openedBox}/>
+          </Button>
+          <p>Beccate sto regalo! N'estate de focu!</p>
+        </div> :
+        <Button className="gift closed-gift" onClick={() => handleGiftOpen()}>
+          <Image src={IMAGES.closedBox} alt='first image'/>
+        </Button>}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  </>)
 }
 
 export default App
