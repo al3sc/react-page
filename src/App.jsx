@@ -40,12 +40,12 @@ function App() {
         {isOpen ?
         <div>
           <Button className="gift opened-gift" onClick={() => handleGiftClose()}>
-            <Image src={IMAGES.openedBox}/>
+            <Image className="gift" src={IMAGES.openedBox}/>
           </Button>
           <p>Beccate sto regalo! N'estate de focu!</p>
         </div> :
         <Button className="gift closed-gift" onClick={() => handleGiftOpen()}>
-          <Image src={IMAGES.closedBox} alt='first image'/>
+          <Image className="gift" src={IMAGES.closedBox} alt='first image'/>
         </Button>}
       </div>
   </>)
