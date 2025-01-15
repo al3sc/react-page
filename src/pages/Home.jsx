@@ -1,5 +1,5 @@
-import DownloadForm from '../components/DownloadForm';
-import downloadImage from '../files/download_image.jpg';
+import ImageForm from '../components/ImageForm';
+import showedImage from '../files/download_image.jpg';
 
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -11,8 +11,9 @@ function Home() {
     <>
       <h2>Home Page</h2>
       
-      <DownloadForm downloadImage={downloadImage} />
-      <Button onClick={() => navigate("/react-page/test/test_param")}>to Test Page...</Button>
+      <Button onClick={() => navigate("/react-page/test/test_param")}>to Test Page ...</Button>
+      
+      <ImageForm showedImage={showedImage} />
     </>
   )
 }
